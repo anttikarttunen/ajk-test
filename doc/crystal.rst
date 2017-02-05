@@ -51,8 +51,10 @@ parameter is not needed
 2) To make valid CRYSTAL input files, there are two possible options:
 
    a) Manually: modify the generated supercell-xxx.d12 files by replacing the line 
-     ``***** Insert basis sets and parameters here *****`` with the basis set 
-     and computational parameters.
+
+     ``***** Insert basis sets and parameters here *****`` 
+
+     with the basis set and computational parameters.
 
    b) Recommended option: before generating the supercells, include a file named
       ``TEMPLATE`` in the current directory. This file should contain the
@@ -129,7 +131,7 @@ parameter is not needed
    |crystal-band|
 
    .. |crystal-band| image:: Si-crystal-band.png
-			   :width: ee%
+			   :width: 33%
 
    For further settings and command options, see the general Phonopy documentation
    :ref:`setting_tags` and :ref:`command_options`, respectively, and
