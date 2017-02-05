@@ -49,9 +49,10 @@ parameter is not needed
    ``supercell-001.ext`` will be created.
 
 2) To make valid CRYSTAL input files, there are two possible options:
+
    a) Manually: modify the generated supercell-xxx.d12 files by replacing the line 
-      ``***** Insert basis sets and parameters here *****``
-     with the basis set and computational parameters.
+     ``***** Insert basis sets and parameters here *****`` with the basis set 
+     and computational parameters.
 
    b) Recommended option: before generating the supercells, include a file named
       ``TEMPLATE`` in the current directory. This file should contain the
@@ -128,7 +129,7 @@ parameter is not needed
    |crystal-band|
 
    .. |crystal-band| image:: Si-crystal-band.png
-			   :width: 50%
+			   :width: ee%
 
    For further settings and command options, see the general Phonopy documentation
    :ref:`setting_tags` and :ref:`command_options`, respectively, and
@@ -150,11 +151,12 @@ and the dielectric tensor. They can be calculated with CRYSTAL.
 The recommended strategy is to carry out a Gamma-point frequency calculation
 with INTENS and INTCPHF. This produces all required quantities and also confirms that
 the structure optimization has converged to a true local minimum.
-(see the FREQCALC-INTENS-INTCPHF block in the beginning of ``crystal.o``
+(see the FREQCALC-INTENS-INTCPHF block in the beginning of ``crystal.o``)
 
 The workflow is very similar to the Si example below:
 
 1) Create displaced supercells::
+
      phonopy --crystal --dim="4 4 4" -d
 
    Note that now the CRYSTAL interface automatically creates the ``BORN``
@@ -173,14 +175,16 @@ The workflow is very similar to the Si example below:
 2) Run the supercell inputs with CRYSTAL
 
 3) Collect forces::
+
      phonopy --crystal -f supercell-*o
 
 4) Calculate phonon dispersion data into band.yaml and save band.pdf,
    using Non-analytical correction --nac::
+
      phonopy --crystal --dim="4 4 4" -p -s --nac band.conf
 
-|crystal-band-nac|
+   |crystal-band-nac|
 
-.. |crystal-band-nac| image:: NaCl-crystal-band-NAC.png
-   			    :width: 50%
+   .. |crystal-band-nac| image:: NaCl-crystal-band-NAC.png
+                               :width: 33%
 
