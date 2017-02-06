@@ -3,115 +3,62 @@
 Interfaces to calculators
 ==========================
 
-The interfaces for VASP, Wien2k, Pwscf, Abinit, Elk and CRYSTAL are built in
-to the usual phonopy command. See the command options and how to
-invoke each of them at :ref:`force_calculators`. 
+Currently the built-in interfaces for VASP, Pwscf, and CRYSTAL are
+prepared. VASP is the default interface and no special option is
+necessary to invoke it, but for the other interfaces, each special
+option has to be specified, e.g. ``--pwscf`` or ``--crystal``.
 
-Physical unit system for calculator
-------------------------------------
+.. toctree::
+   :maxdepth: 1
 
-Physical unit systems used for the calculators are as follows::
+   vasp
+   pwscf
+   crystal
 
-           | Distance   Atomic mass   Force         Force constants
-   -----------------------------------------------------------------
-   VASP    | Angstrom   AMU           eV/Angstrom   eV/Angstrom^2
-   Wien2k  | au (bohr)  AMU           mRy/au        mRy/au^2
-   Pwscf   | au (bohr)  AMU           Ry/au         Ry/au^2
-   Abinit  | au (bohr)  AMU           eV/Angstrom   eV/Angstrom.au
-   Siesta  | au (bohr)  AMU           eV/Angstrom   eV/Angstrom.au
-   elk     | au (bohr)  AMU           hartree/au    hartree/au^2
-   CRYSTAL | Angstrom   AMU           eV/Angstrom   eV/Angstrom^2
+Calculator specific behaviors
+------------------------------
 
-For these sets of physical properties, phonon frequency is calculated
-in THz.
+Physical unit
+^^^^^^^^^^^^^^
 
-Default file name, value, and conversion factor
----------------------------------------------------
+The interfaces for VASP, Pwscf, and CRYSTAL  are built in to the phono3py command.
 
-Default unit cell file name for calculator
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Without specifying ``-c`` option, default file name for unit cell is
-used as shown below::
-
-   VASP    | POSCAR     
-   Wien2k  | case.struct
-   Pwscf   | unitcell.in
-   Abinit  | unitcell.in
-   Siesta  | input.fdf
-   Elk     | elk.in
-   CRYSTAL | crystal.o
-
-Default displacement distances
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Without specifying ``DISPLACEMENT_DISTANCE`` tag or ``--amplitude``
-option, default displacement distance is used when creating supercells
-with displacements ``CREATE_DISPLACEMENTS = .TRUE.`` or ``-d``
-option. The default value is dependent on calculator, and the list is
-shown below::
-
-   VASP    | 0.01 Angstrom
-   Wien2k  | 0.02 au (bohr)
-   Pwscf   | 0.02 au (bohr)
-   Abinit  | 0.02 au (bohr)
-   Siesta  | 0.02 au (bohr)
-   Elk     | 0.02 au (bohr)
-   CRYSTAL | 0.01 Angstrom
-
-.. _nac_default_value_interfaces:
-
-Default unit conversion factor for non-analytical term correction
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+For each calculator, each physical unit system is used. The physical
+unit systems used for the calculators are summarized below.
 
 ::
 
-   VASP    | 14.399652
-   Wien2k  | 2000
-   Pwscf   | 2
-   Abinit  | 51.422090
-   Siesta  | 51.422090
-   Elk     | 1
-   CRYSTAL | 14.399652
+           | unit-cell  FORCES_FC3   disp_fc3.yaml
+   -----------------------------------------------
+   VASP    | Angstrom   eV/Angstrom  Angstrom
+   Pwscf   | au (bohr)  Ry/au        au
+   CRYSTAL | Angstrom   eV/Angstrom  Angstrom
+
+``FORCES_FC2`` and ``disp_fc2.yaml`` have the same physical units as
+``FORCES_FC3`` and ``disp_fc3.yaml``, respectively.
+
+.. _default_unit_cell_file_name_for_calculator:
+
+Default unit cell file name
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Default unit cell file names are also changed according to the calculators::
+    
+   VASP    | POSCAR     
+   Pwscf   | unitcell.in
+   CRYSTAL | crystal.o
 
 
-Interface to force calculator
-------------------------------
+.. _default_displacement_distance_for_calculator:
 
-Short tutorials for force calculators are found in the following pages.
+Default displacement distance created
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. toctree::
-   :maxdepth: 2
+Default displacement distances created by ``-d`` option without
+``--amplitude`` option are respectively as follows::
 
-   procedure
-   wien2k
-   pwscf
-   abinit
-   siesta
-   elk
-   crystal
+   VASP    | 0.03 Angstrom
+   Pwscf   | 0.06 au (bohr)
+   CRYSTAL | 0.03 Angstrom
 
-Interface to  VASP DFPT force constants
----------------------------------------
-
-Using VASP DFPT feature, force constants are directly
-calculated. Phonopy VASP DFPT interface reads ``vasprun.xml`` and
-creates ``FORCE_CONSTANTS`` file.
-
-.. toctree::
-   :maxdepth: 2
-
-   vasp
-
-Interface to FHI-aims forces
------------------------------
-
-For FHI-aims, there is a special command, ``phonopy-FHI-aims``. This
-tool is maintained by FHI-aims community and questions may be sent to the
-FHI-aims mailing list.
-
-.. toctree::
-   :maxdepth: 2
-
-   FHI-aims
 
